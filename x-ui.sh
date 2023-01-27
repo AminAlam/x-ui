@@ -121,7 +121,7 @@ update() {
 }
 
 uninstall() {
-    confirm "Are you sure you want to uninstall the panel, xray will also be uninstalled?" "n"
+    confirm "Are you sure you want to uninstall the panel, xray will also be uninstalled? " "n"
     if [[ $? != 0 ]]; then
         if [[ $# == 0 ]]; then
             show_menu
@@ -134,7 +134,7 @@ uninstall() {
     systemctl daemon-reload
     systemctl reset-failed
     rm /etc/x-ui/ -rf
-    rm /usr/local/x-ui/ -rf
+    rm /usr/local/x-ui-english/ -rf
 
     echo ""
     echo -e "The uninstallation is successful. If you want to delete this script, run it after exiting the script ${green}rm /usr/bin/x-ui -f${plain} to delete"
@@ -153,7 +153,7 @@ reset_user() {
         fi
         return 0
     fi
-    /usr/local/x-ui/x-ui setting -username admin -password admin
+    /usr/local/x-ui-english/x-ui setting -username admin -password admin
     echo -e "Username and password have been reset to ${green}admin${plain}, now restart the panel"
     confirm_restart
 }
@@ -166,13 +166,13 @@ reset_config() {
         fi
         return 0
     fi
-    /usr/local/x-ui/x-ui setting -reset
+    /usr/local/x-ui-english/x-ui setting -reset
     echo -e "All panel settings have been reset to default, please restart the panel now and use the default ${green}54321${plain} Port Access Panel"
     confirm_restart
 }
 
 check_config() {
-    info=$(/usr/local/x-ui/x-ui setting -show true)
+    info=$(/usr/local/x-ui-english/x-ui setting -show true)
     if [[ $? != 0 ]]; then
         LOGE "get current settings error,please check logs"
         show_menu
@@ -186,7 +186,7 @@ set_port() {
         LOGD "已取消"
         before_show_menu
     else
-        /usr/local/x-ui/x-ui setting -port ${port}
+        /usr/local/x-ui-english/x-ui setting -port ${port}
         echo -e "After setting the port, please restart the panel now and use the newly set port ${green}${port}${plain} access panel"
         confirm_restart
     fi
@@ -289,7 +289,7 @@ show_log() {
 }
 
 migrate_v2_ui() {
-    /usr/local/x-ui/x-ui v2-ui
+    /usr/local/x-ui-english/x-ui v2-ui
 
     before_show_menu
 }
@@ -402,9 +402,9 @@ check_xray_status() {
 show_xray_status() {
     check_xray_status
     if [[ $? == 0 ]]; then
-        echo -e "xray 状态: ${green}运行${plain}"
+        echo -e "xray state: ${green}run${plain}"
     else
-        echo -e "xray 状态: ${red}未运行${plain}"
+        echo -e "xray state: ${red}run${plain}"
     fi
 }
 
