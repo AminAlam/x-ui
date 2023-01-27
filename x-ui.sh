@@ -416,7 +416,7 @@ ssl_cert_issue() {
     LOGI "2.Know Cloudflare Global API Key"
     LOGI "3.The domain name has been resolved to the current server by Cloudflare"
     LOGI "4.The default installation path for this script to apply for a certificate is /root/cert"
-    confirm "我已确认以上内容[y/n]" "y"
+    confirm "Confirm the above info [y/n]" "y"
     if [ $? -eq 0 ]; then
         cd ~
         LOGI "Install Acme-Script"
